@@ -12,7 +12,14 @@ area_list = []
 def data_reading(file_path):
   try:
     inputfile = open(file_path, "r")
-  except:
+  except IOError as exception:
+    print("IO error info: ", str(exception))
+    return False
+  except ValueError as exception:
+    print("Value error info: ", str(exception))
+    return False
+  except RuntimeError as exception:
+    print("Runtime error info: ", str(exception))
     return False
 
   # Bypasss the first line of data in text
@@ -38,7 +45,8 @@ def data_process():
     try:
       country_population = int(items[1])
       country_area = int(items[5])
-    except:
+    except ValueError as exception:
+      print("Value error info: ", str(exception))
       return False
 
     # Map of country name to packed info
@@ -110,7 +118,7 @@ def run_ranking_query():
     while rank_num < 1 or rank_num > len(population_list):
       try:
         rank_num = int(input("What ranking country do you want to see based on {}?\n".format(rank_base_query)))
-      except:
+      except ValueError:
         continue
 
     the_key = population_list[rank_num - 1]
@@ -120,7 +128,7 @@ def run_ranking_query():
     while rank_num < 1 or rank_num > len(area_list):
       try:
         rank_num = int(input("What ranking country do you want to see based on {}?\n".format(rank_base_query)))
-      except:
+      except ValueError:
         continue
 
     the_key = area_list[rank_num - 1]
@@ -141,11 +149,11 @@ def show_ranking_info(rank_num, rank_base, country_list):
 
 def main():
   if not data_reading("population_by_country_2020.txt"):
-    print("Error in data file reading ...")
+    print("Data reading failed ...")
     return
 
   if not data_process():
-    print("Error in data file processing ...")
+    print("Data processing failed ...")
     return
 
   info_query_start()
