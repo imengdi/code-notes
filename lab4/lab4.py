@@ -3,18 +3,20 @@
 
 import random
 
-NUM_OF_TABLE = 20
+NUM_OF_TABLE = 5
 
 class Restaurant:
   def __init__(self):
     self.__menu = {}
     self.__tables = {}
     self.__orders = {}
+    self.__table_num = 0
 
     # Init the number of seats for each table with a rand number
-    # Data structure of tables: (num_of_seats, is_table_reserved)
+    # Data structure of tables: [num_of_seats, is_table_reserved]
     for i in range(1, NUM_OF_TABLE + 1):
-      self.__tables[i] = (random.randint(1, 10), False)
+      self.__tables[i] = [random.randint(1, 10), False]
+      self.__table_num += 1
 
 
   def add_items(self):
@@ -113,17 +115,19 @@ class Restaurant:
       return
 
     print("\n*****YOUR ORDER LIST*****")
-    print("\nOrder Items\t\tOrder Num")
-    print("-----------\t\t----------")
+    print("\nOrder Items\t\tUnit Price\t\tOrder Num\t\tOrder Price")
+    print("-----------\t\t----------\t\t---------\t\t-----------")
 
     total_price = 0.0
     for i in self.__orders:
       order_num = self.__orders[i]
-      print("{}\t\t\t{}".format(i, order_num))
 
       # Calc the total price
-      order_price = self.__menu[i]
-      total_price += order_price * order_num
+      unit_price = self.__menu[i]
+      order_price = unit_price * order_num
+      total_price += order_price
+
+      print("{}\t\t\t{}\t\t\t{}\t\t\t{}".format(i, unit_price, order_num, order_price))
 
     print("\n--------------------")
     print("Total Price: {}\n".format(total_price))
