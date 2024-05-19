@@ -10,6 +10,8 @@ class Restaurant:
   def __init__(self):
     self.__menu = {}
     self.__tables = {}
+
+    # Init the number of seats for each table with a rand number
     for i in range(1, NUM_OF_TABLE + 1):
       self.__tables[i] = (random.randint(1, 10), False)
 
@@ -52,11 +54,18 @@ class Restaurant:
 
 
   def print_reservation(self):
-    print("\nAvailable Table List")
-    print("#NO.\tSeats")
+    print("\n*****Available Table List*****")
+    print("\nTable NO.\t\tSeats")
+    print("---------\t\t-----")
+
+    available_table = 0
     for i in self.__tables:
       if self.__tables[i][1] is False:
-        print("{}\t{}".format(i, self.__tables[i][0]))
+        print("#{}\t\t\t{}".format(i, self.__tables[i][0]))
+        available_table += 1
+
+    if available_table == 0:
+      print("No available for reservation!!!")
 
 
   def print_orders(self):
@@ -64,6 +73,6 @@ class Restaurant:
 
 
 r = Restaurant()
-r.add_items()
-r.print_menu()
-# r.print_reservation()
+# r.add_items()
+# r.print_menu()
+r.print_reservation()
