@@ -12,6 +12,7 @@ class Restaurant:
     self.__orders = {}
 
     # Init the number of seats for each table with a rand number
+    # Data structure of tables: (num_of_seats, is_table_reserved)
     for i in range(1, NUM_OF_TABLE + 1):
       self.__tables[i] = (random.randint(1, 10), False)
 
@@ -32,10 +33,12 @@ class Restaurant:
       except ValueError:
         continue
 
+      print("Item added to menu!")
       self.__menu[enter_name] = enter_price
 
 
-  def make_reservation(self, people_num):
+  def make_reservation(self):
+    # people_num
     pass
 
 
@@ -128,10 +131,14 @@ class Restaurant:
 
 def main():
   r = Restaurant()
+
   r.add_items()
-  # r.print_menu()
-  # r.print_reservation()
+  r.print_reservation()
   r.take_orders()
 
+  r.make_reservation()
+  r.print_reservation()
 
+
+# Entry point of the program
 main()
