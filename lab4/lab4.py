@@ -10,6 +10,7 @@ class Restaurant:
   def __init__(self):
     self.__menu = {}
     self.__tables = {}
+    self.__orders = {}
 
     # Init the number of seats for each table with a rand number
     for i in range(1, NUM_OF_TABLE + 1):
@@ -17,11 +18,12 @@ class Restaurant:
 
 
   def add_items(self):
-    user_enter = ""
-    while user_enter != "done":
+    while True:
       user_enter = input("Enter the item <NAME> and <PRICE>, 'done' to exit: ")
-      enter_items = user_enter.split()
+      if user_enter == "done":
+        break
 
+      enter_items = user_enter.split()
       if len(enter_items) != 2:
         continue
 
@@ -39,7 +41,41 @@ class Restaurant:
 
 
   def take_orders(self):
-    pass
+    if len(self.__menu) == 0:
+      print("\nNothing to order today ...")
+      return
+
+    self.print_menu()
+    print("\n*****PLACE your ORDER*****\n")
+
+    while True:
+      user_enter = input("Enter the order <NAME> and <NUM>, 'done' to exit: ")
+      if user_enter == "done":
+        break
+
+      enter_items = user_enter.split()
+      if len(enter_items) != 2:
+        print("Invalid order input, please enter again ...")
+        continue
+
+      try:
+        order_num = int(enter_items[1])
+        order_name = enter_items[0]
+      except ValueError:
+        print("Invalid order <NUM>, please enter again ...")
+        continue
+
+      if order_name not in self.__menu:
+        print("The order <NAME> not in menu, please enter again ...")
+        continue
+
+      print("Order placed!")
+      if order_name in self.__orders:
+        self.__orders[order_name] += order_num
+      else:
+        self.__orders[order_name] = order_num
+
+    self.print_orders()
 
 
   def print_menu(self):
@@ -47,6 +83,7 @@ class Restaurant:
       print("\nNo items in the menu ...")
       return
 
+    print("\n*****MENU to ORDER*****")
     print("\nItem Name\t\tItem Price")
     print("---------\t\t----------")
     for i in self.__menu:
@@ -65,14 +102,15 @@ class Restaurant:
         available_table += 1
 
     if available_table == 0:
-      print("No available for reservation!!!")
+      print("No available table for reservation!!!\n")
 
 
   def print_orders(self):
-    pass
+    print(self.__orders)
 
 
 r = Restaurant()
-# r.add_items()
+r.add_items()
 # r.print_menu()
-r.print_reservation()
+# r.print_reservation()
+r.take_orders()
