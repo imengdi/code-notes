@@ -3,7 +3,6 @@
 
 import random
 
-
 NUM_OF_TABLE = 20
 
 class Restaurant:
@@ -106,11 +105,33 @@ class Restaurant:
 
 
   def print_orders(self):
-    print(self.__orders)
+    if len(self.__orders) == 0:
+      print("\nNo order placed ...")
+      return
+
+    print("\n*****YOUR ORDER LIST*****")
+    print("\nOrder Items\t\tOrder Num")
+    print("-----------\t\t----------")
+
+    total_price = 0.0
+    for i in self.__orders:
+      order_num = self.__orders[i]
+      print("{}\t\t\t{}".format(i, order_num))
+
+      # Calc the total price
+      order_price = self.__menu[i]
+      total_price += order_price * order_num
+
+    print("\n--------------------")
+    print("Total Price: {}\n".format(total_price))
 
 
-r = Restaurant()
-r.add_items()
-# r.print_menu()
-# r.print_reservation()
-r.take_orders()
+def main():
+  r = Restaurant()
+  r.add_items()
+  # r.print_menu()
+  # r.print_reservation()
+  r.take_orders()
+
+
+main()
