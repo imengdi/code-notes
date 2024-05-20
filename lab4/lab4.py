@@ -66,8 +66,8 @@ class Restaurant:
         print("Invalid people <NUM>, please enter again ...")
         continue
 
-      opt_table_id = -1
-      opt_seats = MAX_TABLE_SEATS + 1
+      opt_table_id = None
+      opt_table_seats = MAX_TABLE_SEATS + 1
 
       for table_id in self.__tables:
         table_status = self.__tables[table_id][TABLE_RESVE]
@@ -75,11 +75,11 @@ class Restaurant:
 
         if table_status is False and table_seats >= people_num:
           # Check if the minimum table seat can match the people number
-          if opt_seats > table_seats:
+          if opt_table_seats > table_seats:
             opt_table_id = table_id
-            opt_seats = table_seats
+            opt_table_seats = table_seats
 
-      if opt_table_id != -1:
+      if opt_table_id is not None:
         self.__tables[opt_table_id][TABLE_RESVE] = True
         self.__table_num -= 1
         print("Reservation success!!!")
