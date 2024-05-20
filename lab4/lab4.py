@@ -4,8 +4,10 @@
 import random
 
 NUM_OF_TABLE = 5
+MAX_TABLE_SEATS = 10
 TABLE_SEATS = 0
 TABLE_RESVE = 1
+
 
 class Restaurant:
   def __init__(self):
@@ -17,7 +19,7 @@ class Restaurant:
     # Init the number of seats for each table with a rand number
     # Data structure of tables: [TABLE_SEATS, TABLE_RESVE]
     for table_id in range(1, NUM_OF_TABLE + 1):
-      self.__tables[table_id] = [random.randint(1, 10), False]
+      self.__tables[table_id] = [random.randint(1, MAX_TABLE_SEATS), False]
       self.__table_num += 1
 
 
@@ -42,8 +44,50 @@ class Restaurant:
 
 
   def make_reservation(self):
-    # people_num
-    pass
+    if self.__table_num == 0:
+      print("\nNo table left for reservation ...")
+      return
+
+    self.print_reservation()
+    print("\n*****START your RESERVATION*****\n")
+
+    while True:
+      if self.__table_num == 0:
+        print("Exit, since no table left for reservation ...")
+        break
+
+      user_enter = input("The <NUM> of people come to restaurant, 'done' to exit: ")
+      if user_enter == "done":
+        break
+
+      try:
+        people_num = int(user_enter)
+      except ValueError:
+        print("Invalid people <NUM>, please enter again ...")
+        continue
+
+      opt_table_id = -1
+      opt_seats = MAX_TABLE_SEATS + 1
+
+      for table_id in self.__tables:
+        table_status = self.__tables[table_id][TABLE_RESVE]
+        table_seats = self.__tables[table_id][TABLE_SEATS]
+
+        if table_status is False and table_seats >= people_num:
+          # Check if the minimum table seat can match the people number
+          if opt_seats > table_seats:
+            opt_table_id = table_id
+            opt_seats = table_seats
+
+      if opt_table_id != -1:
+        self.__tables[opt_table_id][TABLE_RESVE] = True
+        self.__table_num -= 1
+        print("Reservation success!!!")
+
+        self.print_reservation()
+        print()
+      else:
+        print("No table to reserve for {} people ...".format(people_num))
 
 
   def take_orders(self):
@@ -138,11 +182,8 @@ def main():
   r = Restaurant()
 
   r.add_items()
-  r.print_reservation()
   r.take_orders()
-
   r.make_reservation()
-  r.print_reservation()
 
 
 # Entry point of the program
