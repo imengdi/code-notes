@@ -4,6 +4,8 @@
 import random
 
 NUM_OF_TABLE = 5
+TABLE_SEATS = 0
+TABLE_RESVE = 1
 
 class Restaurant:
   def __init__(self):
@@ -13,9 +15,9 @@ class Restaurant:
     self.__table_num = 0
 
     # Init the number of seats for each table with a rand number
-    # Data structure of tables: [num_of_seats, is_table_reserved]
-    for i in range(1, NUM_OF_TABLE + 1):
-      self.__tables[i] = [random.randint(1, 10), False]
+    # Data structure of tables: [TABLE_SEATS, TABLE_RESVE]
+    for table_id in range(1, NUM_OF_TABLE + 1):
+      self.__tables[table_id] = [random.randint(1, 10), False]
       self.__table_num += 1
 
 
@@ -90,8 +92,8 @@ class Restaurant:
     print("\n*****MENU to ORDER*****")
     print("\nItem Name\t\tItem Price")
     print("---------\t\t----------")
-    for i in self.__menu:
-      print("{}\t\t\t{}".format(i, self.__menu[i]))
+    for unit_name in self.__menu:
+      print("{}\t\t\t{}".format(unit_name, self.__menu[unit_name]))
 
 
   def print_reservation(self):
@@ -99,14 +101,13 @@ class Restaurant:
     print("\nTable NO.\t\tSeats")
     print("---------\t\t-----")
 
-    available_table = 0
-    for i in self.__tables:
-      if self.__tables[i][1] is False:
-        print("#{}\t\t\t{}".format(i, self.__tables[i][0]))
-        available_table += 1
-
-    if available_table == 0:
+    if self.__table_num == 0:
       print("No available table for reservation!!!\n")
+      return
+
+    for table_id in self.__tables:
+      if self.__tables[table_id][TABLE_RESVE] is False:
+        print("#{}\t\t\t{}".format(table_id, self.__tables[table_id][TABLE_SEATS]))
 
 
   def print_orders(self):
@@ -119,15 +120,15 @@ class Restaurant:
     print("-----------\t\t----------\t\t---------\t\t-----------")
 
     total_price = 0.0
-    for i in self.__orders:
-      order_num = self.__orders[i]
+    for unit_name in self.__orders:
+      order_num = self.__orders[unit_name]
 
       # Calc the total price
-      unit_price = self.__menu[i]
+      unit_price = self.__menu[unit_name]
       order_price = unit_price * order_num
       total_price += order_price
 
-      print("{}\t\t\t{}\t\t\t{}\t\t\t{}".format(i, unit_price, order_num, order_price))
+      print("{}\t\t\t{}\t\t\t{}\t\t\t{}".format(unit_name, unit_price, order_num, order_price))
 
     print("\n--------------------")
     print("Total Price: {}\n".format(total_price))
