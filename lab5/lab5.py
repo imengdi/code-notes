@@ -28,11 +28,40 @@ class Inventory:
 
 
 class SaleItem:
-  def __init__(self):
-    pass
+  def __init__(self, name, id_num, price):
+    self.name = name
+    self.id_num = id_num
+    self.price = price
 
   def __repr__(self):
-    return self.__class__.__name__
+    return "{}({}): {}".format(self.name, self.id_num, self.price)
+
+
+class PackagedFood(SaleItem):
+  def __init__(self, name, id_num, price):
+    super().__init__(name, id_num, price)
+
+  def __repr__(self):
+    return super().__repr__()
+
+
+class HotFood(SaleItem):
+  def __init__(self, name, id_num, price):
+    super().__init__(name, id_num, price)
+    self.tax = 9.13 / 100
+
+  def __repr__(self):
+    return super().__repr__() + " - heated"
+
+
+class Drink(SaleItem):
+  def __init__(self, name, id_num, price):
+    super().__init__(name, id_num, price)
+    self.tax = 9.13 / 100
+    self.crv = {'S': 0.05, 'L': 0.10}
+
+  def __repr__(self):
+    return super().__repr__()
 
 
 def data_reading(file_path, data_list):
@@ -71,4 +100,8 @@ def main():
 main()
 
 b = Inventory()
+c = SaleItem("Water", "32", "1.5")
+d = HotFood("W", 33, 1.2)
 print(b)
+print(c)
+print(d)
