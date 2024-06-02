@@ -37,7 +37,12 @@ class Inventory:
     self.__hot_food_header = "Hot food"
 
     self.__drink = []
-    self.__drink_header = "Drinks"
+    self.__drink_header = "Drink"
+
+    self.__inventory_dic = {}
+    self.__inventory_dic[self.__packaged_food_header] = self.__packaged_food
+    self.__inventory_dic[self.__hot_food_header] = self.__hot_food
+    self.__inventory_dic[self.__drink_header] = self.__drink
 
     # Loop through the rest rest data in text
     for line in input_file:
@@ -62,37 +67,34 @@ class Inventory:
 
       else:
         print("Error info: Sale item ID_NUM out of range ...")
+        continue
 
     # Close file and return
     input_file.close()
 
   def __repr__(self):
-    pfood_name = "Packaged food"
-    pfood_num = len(self.__packaged_food)
-    pfood = "{}: {}".format(pfood_name, pfood_num)
+    disp_info = []
 
-    hfood_name = "Hot food"
-    hfood_num = len(self.__hot_food)
-    hfood = "{}: {}".format(hfood_name, hfood_num)
+    for item_header in self.__inventory_dic:
+      item_num = len(self.__inventory_dic[item_header])
+      if item_num > 1:
+        item_name = item_header.lower() + "s"
+      else:
+        item_name = item_header.lower()
+      item_info = "{} {}".format(item_num, item_name)
+      disp_info.append(item_info)
 
-    drink_name = "Drinks"
-    drink_num = len(self.__drink)
-    drink = "{}: {}".format(drink_name, drink_num)
-
-    return "{}\n{}\n{}".format(pfood, hfood, drink)
+    return "{}, {}, {}".format(disp_info[0], disp_info[1], disp_info[2])
 
   def inventory_status(self):
     return self.__inventory_valid
 
-  def print_items(self):
-    for pf in self.__packaged_food:
-      print(pf)
-
-    for hf in self.__hot_food:
-      print(hf)
-
-    for dk in self.__drink:
-      print(dk)
+  def list_inventory_items(self):
+    for item_header in self.__inventory_dic:
+      print(item_header)
+      for item_obj in self.__inventory_dic[item_header]:
+        print(item_obj)
+        item_obj.get_final_price()
 
 
 class SaleItem:
@@ -102,9 +104,9 @@ class SaleItem:
     self.price = price
 
   def __repr__(self):
-    return "{}({}): {}".format(self.name, self.id_num, self.price)
+    return "{}({}):{}".format(self.name, self.id_num, self.price)
 
-  def print_hello(self):
+  def get_final_price(self):
     print("hello world")
 
 
@@ -145,9 +147,9 @@ def main():
     print(c)
     print(d)
 
-    d.print_hello()
+    # d.print_hello()
 
-    b.print_items()
+    b.list_inventory_items()
 
 
 # Entry point of the program
