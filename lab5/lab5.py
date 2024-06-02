@@ -22,6 +22,7 @@ class UserInterface:
 class Inventory:
   def __init__(self, file_name):
     self.__inventory_valid = True
+    self.__inventory_dic = {}
 
     try:
       input_file = open(file_name, "r")
@@ -30,19 +31,13 @@ class Inventory:
       print("IO error info: ", str(exception))
       return
 
-    self.__packaged_food = []
-    self.__packaged_food_header = "Packaged food"
+    packaged_food_objs = []
+    hot_food_objs = []
+    drink_objs = []
 
-    self.__hot_food = []
-    self.__hot_food_header = "Hot food"
-
-    self.__drink = []
-    self.__drink_header = "Drink"
-
-    self.__inventory_dic = {}
-    self.__inventory_dic[self.__packaged_food_header] = self.__packaged_food
-    self.__inventory_dic[self.__hot_food_header] = self.__hot_food
-    self.__inventory_dic[self.__drink_header] = self.__drink
+    self.__inventory_dic["Packaged food"] = packaged_food_objs
+    self.__inventory_dic["Hot food"] = hot_food_objs
+    self.__inventory_dic["Drink"] = drink_objs
 
     # Loop through the rest rest data in text
     for line in input_file:
@@ -57,15 +52,15 @@ class Inventory:
         continue
 
       if 10 <= id_num <= 19:
-        self.__packaged_food.append(PackagedFood(name, id_num, price))
+        packaged_food_objs.append(PackagedFood(name, id_num, price))
 
       elif 20 <= id_num <= 29:
-        self.__hot_food.append(HotFood(name, id_num, price))
+        hot_food_objs.append(HotFood(name, id_num, price))
 
       elif 30 <= id_num <= 39:
         if size != "S" and size != "L":
           continue
-        self.__drink.append(Drink(name, id_num, price, size))
+        drink_objs.append(Drink(name, id_num, price, size))
 
       else:
         print("Error info: Sale item ID_NUM out of range ...")
