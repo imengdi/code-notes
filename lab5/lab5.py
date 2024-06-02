@@ -111,7 +111,7 @@ class SaleItem:
     return "{}({}):{}".format(self.name, self.id_num, self.price)
 
   def get_final_price(self):
-    return None
+    return
 
 
 class PackagedFood(SaleItem):
@@ -152,14 +152,10 @@ class Drink(SaleItem):
 
 def main():
   b = Inventory("items.csv")
-  if b.inventory_status():
-    # c = SaleItem("Water", "32", "1.5")
-    # d = HotFood("W", 33, 1.2)
-    print(b)
-    # print(c)
-    # print(d)
 
-    # d.print_hello()
+  if b.inventory_status():
+    print(b)
+    print()
 
     b.list_inventory_items()
 
