@@ -154,4 +154,7 @@ def main():
 main()
 
 big = {1: "hello", 2: "world"}
-print(big[0])
+key = 0
+
+if key in big:
+  print(big[key])
