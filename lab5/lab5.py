@@ -154,8 +154,9 @@ class Drink(SaleItem):
 
 
 def main():
-  obj = UserInterface()
-  obj.print_menu()
+  ui = UserInterface()
+  ui.print_menu()
+  print(ui)
 
 
 # Entry point of the program
