@@ -100,7 +100,7 @@ class Inventory:
       for item_obj in self.__inventory_dic[item_header]:
         print(item_obj)
         item_price = item_obj.get_final_price()
-        if item_price is not None:
+        if item_price != item_obj.get_input_price():
           print(item_price)
 
 
@@ -113,8 +113,11 @@ class SaleItem:
   def __repr__(self):
     return "{}({}):{}".format(self.name, self.id_num, self.price)
 
+  def get_input_price(self):
+    return self.price
+
   def get_final_price(self):
-    return
+    return self.price
 
 
 class PackagedFood(SaleItem):
