@@ -54,14 +54,22 @@ class Inventory:
 
       else:
         print("Error info: Sale item ID_NUM out of range ...")
-
-      print("{}-{}-{}-{}".format(id_num, name, price, size))
+      # print("{}-{}-{}-{}".format(id_num, name, price, size))
 
     # Close file and return
     input_file.close()
 
   def __repr__(self):
-    return self.__class__.__name__
+    pfood_name = "Packaged food"
+    pfood_num = len(self.__packaged_food)
+
+    hfood_name = "Hot food"
+    hfood_num = len(self.__hot_food)
+
+    drink_name = "Drinks"
+    drink_num = len(self.__drink)
+
+    return "{}: {}\n{}: {}\n{}: {}".format(pfood_name, pfood_num, hfood_name, hfood_num, drink_name, drink_num)
 
 
 class SaleItem:
