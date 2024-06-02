@@ -1,16 +1,24 @@
 # Name: Mengdi Zhu
 # Lab: Lab5
 
+import sys
+
 
 class UserInterface:
   def __init__(self):
-    pass
+    self.inst = Inventory("items.csv")
+
+    if not self.inst.inventory_status():
+      print("Program end ...")
+      sys.exit(1)
+    else:
+      print(self.inst)
 
   def __repr__(self):
     return self.__class__.__name__
 
   def print_menu(self):
-    pass
+    self.inst.list_inventory_items()
 
   def read_user_choices(self):
     pass
@@ -146,13 +154,8 @@ class Drink(SaleItem):
 
 
 def main():
-  b = Inventory("items.csv")
-
-  if b.inventory_status():
-    print(b)
-    print()
-
-    b.list_inventory_items()
+  obj = UserInterface()
+  obj.print_menu()
 
 
 # Entry point of the program
