@@ -63,6 +63,8 @@ class Inventory:
         self.__hot_food.append(HotFood(name, id_num, price))
 
       elif 30 <= id_num <= 39:
+        if size != "S" and size != "L":
+          continue
         self.__drink.append(Drink(name, id_num, price, size))
 
       else:
@@ -94,7 +96,7 @@ class Inventory:
       print(item_header)
       for item_obj in self.__inventory_dic[item_header]:
         print(item_obj)
-        item_obj.get_final_price()
+        item_obj.print_final_price()
 
 
 class SaleItem:
@@ -106,8 +108,8 @@ class SaleItem:
   def __repr__(self):
     return "{}({}):{}".format(self.name, self.id_num, self.price)
 
-  def get_final_price(self):
-    print("hello world")
+  def print_final_price(self):
+    pass
 
 
 class PackagedFood(SaleItem):
@@ -126,6 +128,10 @@ class HotFood(SaleItem):
   def __repr__(self):
     return super().__repr__() + " - heated"
 
+  def print_final_price(self):
+    final_price = self.price * (1 + self.tax)
+    print(round(final_price, 2))
+
 
 class Drink(SaleItem):
   def __init__(self, name, id_num, price, size):
@@ -135,17 +141,21 @@ class Drink(SaleItem):
     self.crv = {'S': 0.05, 'L': 0.10}
 
   def __repr__(self):
-    return super().__repr__() + " - " + self.size
+    return super().__repr__()
+
+  def print_final_price(self):
+    final_price = (self.price + self.crv[self.size]) * (1 + self.tax)
+    print(round(final_price, 2))
 
 
 def main():
   b = Inventory("items.csv")
   if b.inventory_status():
-    c = SaleItem("Water", "32", "1.5")
-    d = HotFood("W", 33, 1.2)
+    # c = SaleItem("Water", "32", "1.5")
+    # d = HotFood("W", 33, 1.2)
     print(b)
-    print(c)
-    print(d)
+    # print(c)
+    # print(d)
 
     # d.print_hello()
 
@@ -154,9 +164,3 @@ def main():
 
 # Entry point of the program
 main()
-
-big = {1: "hello", 2: "world"}
-key = 0
-
-if key in big:
-  print(big[key])
