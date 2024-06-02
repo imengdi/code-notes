@@ -96,7 +96,9 @@ class Inventory:
       print(item_header)
       for item_obj in self.__inventory_dic[item_header]:
         print(item_obj)
-        item_obj.print_final_price()
+        item_price = item_obj.get_final_price()
+        if item_price is not None:
+          print(item_price)
 
 
 class SaleItem:
@@ -108,8 +110,8 @@ class SaleItem:
   def __repr__(self):
     return "{}({}):{}".format(self.name, self.id_num, self.price)
 
-  def print_final_price(self):
-    pass
+  def get_final_price(self):
+    return None
 
 
 class PackagedFood(SaleItem):
@@ -128,9 +130,9 @@ class HotFood(SaleItem):
   def __repr__(self):
     return super().__repr__() + " - heated"
 
-  def print_final_price(self):
+  def get_final_price(self):
     final_price = self.price * (1 + self.tax)
-    print(round(final_price, 2))
+    return round(final_price, 2)
 
 
 class Drink(SaleItem):
@@ -143,9 +145,9 @@ class Drink(SaleItem):
   def __repr__(self):
     return super().__repr__()
 
-  def print_final_price(self):
+  def get_final_price(self):
     final_price = (self.price + self.crv[self.size]) * (1 + self.tax)
-    print(round(final_price, 2))
+    return round(final_price, 2)
 
 
 def main():
