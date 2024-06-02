@@ -27,10 +27,35 @@ class Inventory:
       print("IO error info: ", str(exception))
       return
 
+    self.__packaged_food = []
+    self.__hot_food = []
+    self.__drink = []
+
     # Loop through the rest rest data in text
     for line in input_file:
       items = line.strip().split(',')
-      print(items)
+      try:
+        id_num = int(items[0])
+        name = items[1]
+        price = float(items[2])
+        size = items[3]
+      except ValueError as exception:
+        print("Value error info: ", str(exception))
+        continue
+
+      if 10 <= id_num <= 19:
+        self.__packaged_food.append(PackagedFood(name, id_num, price))
+
+      elif 20 <= id_num <= 29:
+        self.__hot_food.append(HotFood(name, id_num, price))
+
+      elif 30 <= id_num <= 39:
+        self.__drink.append(Drink(name, id_num, price, size))
+
+      else:
+        print("Error info: Sale item ID_NUM out of range ...")
+
+      print("{}-{}-{}-{}".format(id_num, name, price, size))
 
     # Close file and return
     input_file.close()
@@ -70,8 +95,9 @@ class HotFood(SaleItem):
 
 
 class Drink(SaleItem):
-  def __init__(self, name, id_num, price):
+  def __init__(self, name, id_num, price, size):
     super().__init__(name, id_num, price)
+    self.size = size
     self.tax = 9.13 / 100
     self.crv = {'S': 0.05, 'L': 0.10}
 
