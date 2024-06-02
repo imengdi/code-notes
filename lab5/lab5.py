@@ -6,6 +6,9 @@ class UserInterface:
   def __init__(self):
     pass
 
+  def __repr__(self):
+    return self.__class__.__name__
+
   def print_menu(self):
     pass
 
@@ -15,13 +18,23 @@ class UserInterface:
   def print_receipt(self):
     pass
 
-  def __repr__(self):
-    return self.__class__.__name__
-
 
 class Inventory:
-  def __init__(self):
-    pass
+  def __init__(self, file_name):
+    try:
+      input_file = open(file_name, "r")
+    except IOError as exception:
+      print("IO error info: ", str(exception))
+      return
+
+    # Loop through the rest rest data in text
+    for line in input_file:
+      line = line.strip()
+      items = line.split(',')
+      print(items)
+
+    # Close file and return
+    input_file.close()
 
   def __repr__(self):
     return self.__class__.__name__
@@ -35,6 +48,9 @@ class SaleItem:
 
   def __repr__(self):
     return "{}({}): {}".format(self.name, self.id_num, self.price)
+
+  def print_hello(self):
+    print("hello world")
 
 
 class PackagedFood(SaleItem):
@@ -97,11 +113,13 @@ def main():
 
 
 # Entry point of the program
-main()
+# main()
 
-b = Inventory()
+b = Inventory("items.csv")
 c = SaleItem("Water", "32", "1.5")
 d = HotFood("W", 33, 1.2)
 print(b)
 print(c)
 print(d)
+
+d.print_hello()
