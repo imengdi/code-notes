@@ -15,15 +15,24 @@ class UserInterface:
   def print_receipt(self):
     pass
 
+  def __repr__(self):
+    return self.__class__.__name__
+
 
 class Inventory:
   def __init__(self):
     pass
 
+  def __repr__(self):
+    return self.__class__.__name__
+
 
 class SaleItem:
   def __init__(self):
     pass
+
+  def __repr__(self):
+    return self.__class__.__name__
 
 
 def data_reading(file_path, data_list):
@@ -60,3 +69,6 @@ def main():
 
 # Entry point of the program
 main()
+
+b = Inventory()
+print(b)
