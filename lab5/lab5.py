@@ -21,15 +21,23 @@ class UserInterface:
 
 class Inventory:
   def __init__(self, file_name):
+    self.__inventory_valid = True
+
     try:
       input_file = open(file_name, "r")
     except IOError as exception:
+      self.__inventory_valid = False
       print("IO error info: ", str(exception))
       return
 
     self.__packaged_food = []
+    self.__packaged_food_header = "Packaged food"
+
     self.__hot_food = []
+    self.__hot_food_header = "Hot food"
+
     self.__drink = []
+    self.__drink_header = "Drinks"
 
     # Loop through the rest rest data in text
     for line in input_file:
@@ -72,6 +80,9 @@ class Inventory:
     drink = "{}: {}".format(drink_name, drink_num)
 
     return "{}\n{}\n{}".format(pfood, hfood, drink)
+
+  def inventory_status(self):
+    return self.__inventory_valid
 
   def print_items(self):
     for pf in self.__packaged_food:
@@ -127,16 +138,20 @@ class Drink(SaleItem):
 
 def main():
   b = Inventory("items.csv")
-  c = SaleItem("Water", "32", "1.5")
-  d = HotFood("W", 33, 1.2)
-  print(b)
-  print(c)
-  print(d)
+  if b.inventory_status():
+    c = SaleItem("Water", "32", "1.5")
+    d = HotFood("W", 33, 1.2)
+    print(b)
+    print(c)
+    print(d)
 
-  d.print_hello()
+    d.print_hello()
 
-  b.print_items()
+    b.print_items()
 
 
 # Entry point of the program
 main()
+
+big = {1: "hello", 2: "world"}
+print(big[0])
