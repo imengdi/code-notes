@@ -14,7 +14,7 @@ class UserInterface:
       print("Program end ...")
       sys.exit(1)
     else:
-      # Instant of Inventory object and prints the object
+      # Print an instant of the Inventory object
       print(self.inst)
 
   def __repr__(self):
@@ -22,6 +22,14 @@ class UserInterface:
 
   def print_menu(self):
     self.inst.get_inventory_details()
+
+
+class UserInterfaceFinal(UserInterface):
+  def __init__(self):
+    super().__init__()
+
+  def print_menu(self):
+    super().print_menu()
 
   def read_user_choices(self):
     pass
@@ -177,11 +185,16 @@ class Drink(SaleItem):
 
 
 def main():
-  ui = UserInterface()
-  ui.print_menu()
+  # ui = UserInterface()
+  # ui.print_menu()
 
+  # print()
+  # print(ui)
+
+  final_ui = UserInterfaceFinal()
+  final_ui.print_menu()
   print()
-  print(ui)
+  print(final_ui)
 
 
 # Entry point of the program
