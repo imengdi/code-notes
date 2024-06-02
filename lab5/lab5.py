@@ -89,7 +89,7 @@ class Inventory:
       item_info = "{} {}".format(item_num, item_name)
       disp_info.append(item_info)
 
-    return "{}, {}, {}".format(disp_info[0], disp_info[1], disp_info[2])
+    return "{}, {}, {}\n".format(disp_info[0], disp_info[1], disp_info[2])
 
   def inventory_status(self):
     return self.__inventory_valid
@@ -156,6 +156,8 @@ class Drink(SaleItem):
 def main():
   ui = UserInterface()
   ui.print_menu()
+
+  print()
   print(ui)
 
 
