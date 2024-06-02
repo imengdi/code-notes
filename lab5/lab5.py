@@ -54,7 +54,6 @@ class Inventory:
 
       else:
         print("Error info: Sale item ID_NUM out of range ...")
-      # print("{}-{}-{}-{}".format(id_num, name, price, size))
 
     # Close file and return
     input_file.close()
@@ -62,14 +61,27 @@ class Inventory:
   def __repr__(self):
     pfood_name = "Packaged food"
     pfood_num = len(self.__packaged_food)
+    pfood = "{}: {}".format(pfood_name, pfood_num)
 
     hfood_name = "Hot food"
     hfood_num = len(self.__hot_food)
+    hfood = "{}: {}".format(hfood_name, hfood_num)
 
     drink_name = "Drinks"
     drink_num = len(self.__drink)
+    drink = "{}: {}".format(drink_name, drink_num)
 
-    return "{}: {}\n{}: {}\n{}: {}".format(pfood_name, pfood_num, hfood_name, hfood_num, drink_name, drink_num)
+    return "{}\n{}\n{}".format(pfood, hfood, drink)
+
+  def print_items(self):
+    for pf in self.__packaged_food:
+      print(pf)
+
+    for hf in self.__hot_food:
+      print(hf)
+
+    for dk in self.__drink:
+      print(dk)
 
 
 class SaleItem:
@@ -110,7 +122,7 @@ class Drink(SaleItem):
     self.crv = {'S': 0.05, 'L': 0.10}
 
   def __repr__(self):
-    return super().__repr__()
+    return super().__repr__() + " - " + self.size
 
 
 def main():
@@ -122,6 +134,8 @@ def main():
   print(d)
 
   d.print_hello()
+
+  b.print_items()
 
 
 # Entry point of the program
