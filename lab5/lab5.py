@@ -29,8 +29,7 @@ class Inventory:
 
     # Loop through the rest rest data in text
     for line in input_file:
-      line = line.strip()
-      items = line.split(',')
+      items = line.strip().split(',')
       print(items)
 
     # Close file and return
@@ -80,46 +79,16 @@ class Drink(SaleItem):
     return super().__repr__()
 
 
-def data_reading(file_path, data_list):
-  try:
-    inputfile = open(file_path, "r")
-  except IOError as exception:
-    print("IO error info: ", str(exception))
-    return False
-  except ValueError as exception:
-    print("Value error info: ", str(exception))
-    return False
-  except RuntimeError as exception:
-    print("Runtime error info: ", str(exception))
-    return False
-
-  # Loop through the rest rest data in text
-  for line in inputfile:
-    line = line.strip()
-    items = line.split(',')
-    data_list.append(items)
-
-  # Close file and return
-  inputfile.close()
-  return True
-
-
 def main():
-  all_data_list = []
-  data_reading("items.csv", all_data_list)
+  b = Inventory("items.csv")
+  c = SaleItem("Water", "32", "1.5")
+  d = HotFood("W", 33, 1.2)
+  print(b)
+  print(c)
+  print(d)
 
-  for d in all_data_list:
-    print(d)
+  d.print_hello()
 
 
 # Entry point of the program
-# main()
-
-b = Inventory("items.csv")
-c = SaleItem("Water", "32", "1.5")
-d = HotFood("W", 33, 1.2)
-print(b)
-print(c)
-print(d)
-
-d.print_hello()
+main()
