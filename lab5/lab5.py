@@ -5,7 +5,7 @@ import sys
 import re
 
 
-class UserInterface:
+class UI:
   def __init__(self):
     # Create an Inventory object
     self.inst = Inventory("items.csv")
@@ -21,18 +21,10 @@ class UserInterface:
   def __repr__(self):
     return self.__class__.__name__
 
-  def print_menu(self):
-    # Use the defualt for raw fmt printing
-    self.inst.get_inventory_details()
-
-
-class UserInterfaceFinal(UserInterface):
-  def __init__(self):
-    super().__init__()
-
-  def print_menu(self):
-    # Set fmt variable to True for fine printing
-    self.inst.get_inventory_details(True)
+  def print_menu(self, fmt=True):
+    # Set fmt arg to 'True' for fine printing style
+    # Set fmt arg to 'False' for UI v1 printing sytle
+    self.inst.get_inventory_details(fmt)
 
   def read_user_choices(self):
     while True:
@@ -152,7 +144,7 @@ class Inventory:
   def get_inventory_status(self):
     return self.__inventory_valid
 
-  def get_inventory_details(self, fmt=False):
+  def get_inventory_details(self, fmt=True):
     menu_choice = 0
     for item_header in self.__inventory_dic:
       # Show a header for each food / drink type
@@ -292,14 +284,17 @@ class Drink(SaleItem):
 
 
 def main():
-  ui_v1 = UserInterface()
-  ui_v1.print_menu()
+  user_interface = UI()
+
+  # Print menu using UI v1 style
+  user_interface.print_menu(False)
   print()
 
-  ui_final = UserInterfaceFinal()
-  ui_final.print_menu()
-  ui_final.read_user_choices()
+  # Print menu using the final style and read user choices
+  user_interface.print_menu()
+  user_interface.read_user_choices()
 
 
 # Entry point of the program
-main()
+if __name__ == '__main__':
+  main()
