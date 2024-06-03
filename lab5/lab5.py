@@ -35,10 +35,22 @@ class UserInterfaceFinal(UserInterface):
     self.inst.get_inventory_details(True)
 
   def read_user_choices(self):
-    pass
+    while True:
+      user_in = input("\nEnter your choice numbers: ")
+      choices = re.findall(r"\d+", user_in)
+      self.print_receipt(choices)
 
-  def print_receipt(self):
-    pass
+      buy_more = input("\nBuy more? y/n: ")
+      # Exit order loop is input is N or n
+      if buy_more.lower() == "n":
+        break
+
+      # Let user buy more food or drink
+      print()
+      self.print_menu()
+
+  def print_receipt(self, choices):
+    print(choices)
 
 
 class Inventory:
@@ -46,6 +58,7 @@ class Inventory:
     self.__inventory_valid = True
     self.__inventory_dic = {}
     self.__inventory_summary = None
+    self.__inventory_order_list = {}
 
     try:
       input_file = open(file_name, "r")
@@ -146,6 +159,7 @@ class Inventory:
             continue
           indent_space = float_width - len(item_name) - 1
           print(menu_choice, item_name + " " * indent_space, "$", "%.2f" % float(item_price))
+          self.__inventory_order_list[menu_choice] = item_obj
         else:
           print(item_obj)
 
@@ -224,6 +238,7 @@ def main():
 
   ui_final = UserInterfaceFinal()
   ui_final.print_menu()
+  ui_final.read_user_choices()
 
 
 # Entry point of the program
