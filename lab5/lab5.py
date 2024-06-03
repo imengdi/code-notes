@@ -152,21 +152,12 @@ class Inventory:
   def get_inventory_status(self):
     return self.__inventory_valid
 
-  def fine_print_header(self, item_header):
-    indent_space = (Inventory.__layout_width - len(item_header)) // 2 - 1
-    print(" " * indent_space + item_header)
-
-  def fine_print_item(self, menu_choice, item_name, item_price):
-    float_width = Inventory.__layout_width - Inventory.__fixed_width
-    indent_space = float_width - len(item_name) - 1
-    print(menu_choice, item_name + " " * indent_space, "$", "%.2f" % float(item_price))
-
   def get_inventory_details(self, fmt=False):
     menu_choice = 0
-
     for item_header in self.__inventory_dic:
       # Show a header for each food / drink type
       if fmt:
+        # Print with better format
         self.fine_print_header(item_header)
       else:
         print(item_header)
@@ -175,13 +166,12 @@ class Inventory:
         # Print each item to see that the format of __repr__ of each item
         if fmt:
           menu_choice += 1
-
           # Name and Price extracted from the __repr__ string of the object
           (item_name, item_price) = self.get_match_pattern(item_obj.__repr__())
           # Check if regular express match successfully
           if item_name is None or item_price is None:
             continue
-
+          # Print with better format
           self.fine_print_item(menu_choice, item_name, item_price)
         else:
           print(item_obj)
@@ -217,6 +207,15 @@ class Inventory:
     print(total_price)
     if len(invalid_choice) > 0:
       print(invalid_choice)
+
+  def fine_print_header(self, item_header):
+    indent_space = (Inventory.__layout_width - len(item_header)) // 2 - 1
+    print(" " * indent_space + item_header)
+
+  def fine_print_item(self, menu_choice, item_name, item_price):
+    float_width = Inventory.__layout_width - Inventory.__fixed_width
+    indent_space = float_width - len(item_name) - 1
+    print(menu_choice, item_name + " " * indent_space, "$", "%.2f" % float(item_price))
 
 
 class SaleItem:
