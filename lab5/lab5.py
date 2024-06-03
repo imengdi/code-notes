@@ -121,10 +121,11 @@ class Inventory:
     return self.__inventory_valid
 
   def get_inventory_details(self, fmt=False):
-    idx = 0
-    line_width = 24
-    fixed_width = 8
-    float_width = line_width - fixed_width
+    if fmt:
+      menu_choice = 0
+      line_width = 24
+      fixed_width = 8
+      float_width = line_width - fixed_width
 
     for item_header in self.__inventory_dic:
       # Show a header for each food / drink type
@@ -137,14 +138,14 @@ class Inventory:
       for item_obj in self.__inventory_dic[item_header]:
         # Print each item to see that the format of __repr__ of each item
         if fmt:
-          idx += 1
+          menu_choice += 1
           # Name and Price extracted from the __repr__ string of the object
           (item_name, item_price) = self.get_match_pattern(item_obj.__repr__())
           # Check if regular express match successfully
           if item_name is None or item_price is None:
             continue
           indent_space = float_width - len(item_name) - 1
-          print(idx, item_name + " " * indent_space, "$", "%.2f" % float(item_price))
+          print(menu_choice, item_name + " " * indent_space, "$", "%.2f" % float(item_price))
         else:
           print(item_obj)
 
