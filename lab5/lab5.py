@@ -111,13 +111,15 @@ class Inventory:
 
     # Close file and finish obj init
     input_file.close()
+    # Init order list with menu choice 1 to 8
+    self.init_order_list()
 
   def __repr__(self):
     if self.__inventory_summary is None:
-      self.__inventory_summary = self.get_inventory_summary()
+      self.__inventory_summary = self.init_inventory_summary()
     return self.__inventory_summary
 
-  def get_inventory_summary(self):
+  def init_inventory_summary(self):
     disp_info = []
 
     for item_header in self.__inventory_dic:
@@ -130,6 +132,13 @@ class Inventory:
       disp_info.append(item_info)
 
     return "{}, {}, {}\n".format(disp_info[0], disp_info[1], disp_info[2])
+
+  def init_order_list(self):
+    menu_choice = 0
+    for item_header in self.__inventory_dic:
+      for item_obj in self.__inventory_dic[item_header]:
+        menu_choice += 1
+        self.__inventory_order_list[str(menu_choice)] = item_obj
 
   def get_inventory_status(self):
     return self.__inventory_valid
@@ -160,7 +169,6 @@ class Inventory:
             continue
           indent_space = float_width - len(item_name) - 1
           print(menu_choice, item_name + " " * indent_space, "$", "%.2f" % float(item_price))
-          self.__inventory_order_list[str(menu_choice)] = item_obj
         else:
           print(item_obj)
 
