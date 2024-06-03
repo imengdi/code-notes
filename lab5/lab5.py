@@ -224,7 +224,7 @@ class Inventory:
 
     # Print the start words
     print("Invalid choice: ", end='')
-    # Print the middle itmes with pattern "num, num, ..."
+    # Print the middle itmes with pattern "var, var, ..."
     for i in range(last_idx):
       print(invalid_list[i] + ", ", end='')
     # Print the last item of the list
