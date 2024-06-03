@@ -22,6 +22,7 @@ class UserInterface:
     return self.__class__.__name__
 
   def print_menu(self):
+    # Use the defualt for raw fmt printing
     self.inst.get_inventory_details()
 
 
@@ -32,9 +33,6 @@ class UserInterfaceFinal(UserInterface):
   def print_menu(self):
     # Set fmt variable to True for fine printing
     self.inst.get_inventory_details(True)
-    # super().print_menu()
-    # print(self.inst)
-    # print(self.inst.__repr__())
 
   def read_user_choices(self):
     pass
@@ -140,7 +138,9 @@ class Inventory:
         # Print each item to see that the format of __repr__ of each item
         if fmt:
           idx += 1
+          # Name and Price extracted from the __repr__ string of the object
           (item_name, item_price) = self.get_match_pattern(item_obj.__repr__())
+          # Check if regular express match successfully
           if item_name is None or item_price is None:
             continue
           indent_space = float_width - len(item_name) - 1
@@ -217,16 +217,12 @@ class Drink(SaleItem):
 
 
 def main():
-  # ui = UserInterface()
-  # ui.print_menu()
-
-  # print()
-  # print(ui)
-
-  final_ui = UserInterfaceFinal()
-  final_ui.print_menu()
+  ui_v1 = UserInterface()
+  ui_v1.print_menu()
   print()
-  print(final_ui)
+
+  ui_final = UserInterfaceFinal()
+  ui_final.print_menu()
 
 
 # Entry point of the program
