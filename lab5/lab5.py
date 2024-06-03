@@ -30,7 +30,9 @@ class UserInterfaceFinal(UserInterface):
     super().__init__()
 
   def print_menu(self):
-    super().print_menu()
+    # Set fmt variable to True for fine printing
+    self.inst.get_inventory_details(True)
+    # super().print_menu()
     # print(self.inst)
     # print(self.inst.__repr__())
 
@@ -121,17 +123,28 @@ class Inventory:
     return self.__inventory_valid
 
   def get_inventory_details(self, fmt=False):
+    idx = 0
+    line_width = 24
+    fixed_width = 8
+    float_width = line_width - fixed_width
+
     for item_header in self.__inventory_dic:
       # Show a header for each food / drink type
       if fmt:
-        pass
+        indent_space = (line_width - len(item_header)) // 2 - 1
+        print(" " * indent_space + item_header)
       else:
         print(item_header)
 
       for item_obj in self.__inventory_dic[item_header]:
         # Print each item to see that the format of __repr__ of each item
         if fmt:
-          pass
+          idx += 1
+          (item_name, item_price) = self.get_match_pattern(item_obj.__repr__())
+          if item_name is None or item_price is None:
+            continue
+          indent_space = float_width - len(item_name) - 1
+          print(idx, item_name + " " * indent_space, "$", "%.2f" % float(item_price))
         else:
           print(item_obj)
 
@@ -140,6 +153,15 @@ class Inventory:
           item_final_price = item_obj.get_final_price()
           if item_final_price != item_obj.get_item_price():
             print(item_final_price)
+
+  def get_match_pattern(self, repr_str):
+    pattern = r"(\w+\s*\w*)\(\d+\):(\d+\.\d+)"
+    match_res = re.search(pattern, repr_str)
+
+    if match_res:
+      return (match_res.group(1), match_res.group(2))
+    else:
+      return (None, None)
 
 
 class SaleItem:
