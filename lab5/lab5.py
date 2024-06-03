@@ -182,15 +182,6 @@ class Inventory:
           if item_final_price != item_obj.get_item_price():
             print(item_final_price)
 
-  def get_match_pattern(self, repr_str):
-    pattern = r"(\w+\s*\w*)\(\d+\):(\d+\.\d+)"
-    match_res = re.search(pattern, repr_str)
-
-    if match_res:
-      return (match_res.group(1), match_res.group(2))
-    else:
-      return (None, None)
-
   def get_order_receipt(self, choices):
     # print(choices)
     invalid_choice = []
@@ -207,6 +198,15 @@ class Inventory:
     print(total_price)
     if len(invalid_choice) > 0:
       print(invalid_choice)
+
+  def get_match_pattern(self, repr_str):
+    pattern = r"(\w+\s*\w*)\(\d+\):(\d+\.\d+)"
+    match_res = re.search(pattern, repr_str)
+
+    if match_res:
+      return (match_res.group(1), match_res.group(2))
+    else:
+      return (None, None)
 
   def fine_print_header(self, item_header):
     indent_space = (Inventory.__layout_width - len(item_header)) // 2 - 1
