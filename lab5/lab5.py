@@ -2,6 +2,7 @@
 # Lab: Lab5
 
 import sys
+import re
 
 
 class UserInterface:
@@ -30,6 +31,8 @@ class UserInterfaceFinal(UserInterface):
 
   def print_menu(self):
     super().print_menu()
+    # print(self.inst)
+    # print(self.inst.__repr__())
 
   def read_user_choices(self):
     pass
@@ -117,19 +120,26 @@ class Inventory:
   def get_inventory_status(self):
     return self.__inventory_valid
 
-  def get_inventory_details(self):
+  def get_inventory_details(self, fmt=False):
     for item_header in self.__inventory_dic:
       # Show a header for each food / drink type
-      print(item_header)
+      if fmt:
+        pass
+      else:
+        print(item_header)
 
       for item_obj in self.__inventory_dic[item_header]:
         # Print each item to see that the format of __repr__ of each item
-        print(item_obj)
+        if fmt:
+          pass
+        else:
+          print(item_obj)
 
         # For item that has tax and CRV, print the final price of the item
-        item_final_price = item_obj.get_final_price()
-        if item_final_price != item_obj.get_item_price():
-          print(item_final_price)
+        if not fmt:
+          item_final_price = item_obj.get_final_price()
+          if item_final_price != item_obj.get_item_price():
+            print(item_final_price)
 
 
 class SaleItem:
