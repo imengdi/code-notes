@@ -222,12 +222,12 @@ class Inventory:
   def fine_print_invalid(self, invalid_list):
     last_idx = len(invalid_list) - 1
 
-    # Print start words
+    # Print the start words
     print("Invalid choice: ", end='')
-    # Print middle with "element, ..."
+    # Print the middle itmes with pattern "num, num, ..."
     for i in range(last_idx):
       print(invalid_list[i] + ", ", end='')
-    # Print last item
+    # Print the last item of the list
     print(invalid_list[last_idx])
 
 
