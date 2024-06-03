@@ -160,7 +160,7 @@ class Inventory:
             continue
           indent_space = float_width - len(item_name) - 1
           print(menu_choice, item_name + " " * indent_space, "$", "%.2f" % float(item_price))
-          self.__inventory_order_list[menu_choice] = item_obj
+          self.__inventory_order_list[str(menu_choice)] = item_obj
         else:
           print(item_obj)
 
@@ -180,13 +180,21 @@ class Inventory:
       return (None, None)
 
   def get_order_receipt(self, choices):
-    print(choices)
+    # print(choices)
     invalid_choice = []
+    total_price = 0.0
     for c in choices:
-      if int(c) > len(self.__inventory_order_list) or int(c) < 1:
+      if c not in self.__inventory_order_list:
         invalid_choice.append(c)
+      else:
+        item_obj = self.__inventory_order_list[c]
+        final_price = item_obj.get_final_price()
+        total_price += final_price
+        print(c, ".", item_obj.get_item_name(), final_price)
 
-    print(invalid_choice)
+    print(total_price)
+    if len(invalid_choice) > 0:
+      print(invalid_choice)
 
 
 class SaleItem:
@@ -197,6 +205,9 @@ class SaleItem:
 
   def __repr__(self):
     return "{}({}):{}".format(self.name, self.id_num, self.price)
+
+  def get_item_name(self):
+    return self.name
 
   def get_item_price(self):
     return self.price
