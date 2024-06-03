@@ -183,9 +183,9 @@ class Inventory:
             print(item_final_price)
 
   def get_order_receipt(self, choices):
-    # print(choices)
-    invalid_choice = []
     total_price = 0.0
+    invalid_choice = []
+
     for c in choices:
       if c not in self.__inventory_order_list:
         invalid_choice.append(c)
@@ -193,11 +193,13 @@ class Inventory:
         item_obj = self.__inventory_order_list[c]
         final_price = item_obj.get_final_price()
         total_price += final_price
-        print(c, ".", item_obj.get_item_name(), final_price)
+        self.fine_print_item(c + ".", item_obj.get_item_name(), final_price)
 
-    print(total_price)
+    if total_price > 0.0:
+      print("Total:", "$", "%.2f" % float(total_price))
+
     if len(invalid_choice) > 0:
-      print(invalid_choice)
+      self.fine_print_invalid(invalid_choice)
 
   def get_match_pattern(self, repr_str):
     pattern = r"(\w+\s*\w*)\(\d+\):(\d+\.\d+)"
@@ -216,6 +218,17 @@ class Inventory:
     float_width = Inventory.__layout_width - Inventory.__fixed_width
     indent_space = float_width - len(item_name) - 1
     print(menu_choice, item_name + " " * indent_space, "$", "%.2f" % float(item_price))
+
+  def fine_print_invalid(self, invalid_list):
+    last_idx = len(invalid_list) - 1
+
+    # Print start words
+    print("Invalid choice: ", end='')
+    # Print middle with "element, ..."
+    for i in range(last_idx):
+      print(invalid_list[i] + ", ", end='')
+    # Print last item
+    print(invalid_list[last_idx])
 
 
 class SaleItem:
