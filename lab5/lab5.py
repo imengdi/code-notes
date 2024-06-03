@@ -39,8 +39,13 @@ class UserInterfaceFinal(UserInterface):
       user_in = input("\nEnter your choice numbers: ")
       choices = re.findall(r"[-]{0,1}\d+", user_in)
       self.print_receipt(choices)
+      print()
 
-      buy_more = input("\nBuy more? y/n: ")
+      while True:
+        buy_more = input("Buy more? y/n: ")
+        if buy_more.lower() == "n" or buy_more.lower() == "y":
+          break
+
       # Exit order loop is input is N or n
       if buy_more.lower() == "n":
         break
