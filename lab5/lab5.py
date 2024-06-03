@@ -253,7 +253,7 @@ class Drink(SaleItem):
     return super().__repr__()
 
   def get_final_price(self):
-    final_price = (self._price + Drink._crv_fee[self._size]) * (Drink._tax_rate)
+    final_price = (self._price + Drink._crv_fee[self._size]) * (1 + Drink._tax_rate)
     return round(final_price, 2)
 
 
