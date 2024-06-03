@@ -199,18 +199,21 @@ class Inventory:
 
 class SaleItem:
   def __init__(self, name, id_num, price):
-    self.name = name
-    self.id_num = id_num
-    self.price = price
+    self._name = name
+    self._id_num = id_num
+    self._price = price
 
   def __repr__(self):
-    return "{}({}):{}".format(self.name, self.id_num, self.price)
+    return "{}({}):{}".format(self._name, self._id_num, self._price)
 
   def get_item_name(self):
-    return self.name
+    return self._name
+
+  def get_item_id(self):
+    return self._id_num
 
   def get_item_price(self):
-    return self.price
+    return self._price
 
 
 class PackagedFood(SaleItem):
@@ -221,34 +224,36 @@ class PackagedFood(SaleItem):
     return super().__repr__()
 
   def get_final_price(self):
-    return self.price
+    return self._price
 
 
 class HotFood(SaleItem):
+  _tax_rate = 9.13 / 100
+
   def __init__(self, name, id_num, price):
     super().__init__(name, id_num, price)
-    self.tax = 9.13 / 100
 
   def __repr__(self):
     return super().__repr__() + " - heated"
 
   def get_final_price(self):
-    final_price = self.price * (1 + self.tax)
+    final_price = self._price * (1 + HotFood._tax_rate)
     return round(final_price, 2)
 
 
 class Drink(SaleItem):
+  _tax_rate = 9.13 / 100
+  _crv_fee = {'S': 0.05, 'L': 0.10}
+
   def __init__(self, name, id_num, price, size):
     super().__init__(name, id_num, price)
-    self.size = size
-    self.tax = 9.13 / 100
-    self.crv = {'S': 0.05, 'L': 0.10}
+    self._size = size
 
   def __repr__(self):
     return super().__repr__()
 
   def get_final_price(self):
-    final_price = (self.price + self.crv[self.size]) * (1 + self.tax)
+    final_price = (self._price + Drink._crv_fee[self._size]) * (Drink._tax_rate)
     return round(final_price, 2)
 
 
