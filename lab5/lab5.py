@@ -37,7 +37,7 @@ class UserInterfaceFinal(UserInterface):
   def read_user_choices(self):
     while True:
       user_in = input("\nEnter your choice numbers: ")
-      choices = re.findall(r"\d+", user_in)
+      choices = re.findall(r"[-]{0,1}\d+", user_in)
       self.print_receipt(choices)
 
       buy_more = input("\nBuy more? y/n: ")
@@ -50,7 +50,8 @@ class UserInterfaceFinal(UserInterface):
       self.print_menu()
 
   def print_receipt(self, choices):
-    print(choices)
+    if len(choices) > 0:
+      self.inst.get_order_receipt(choices)
 
 
 class Inventory:
@@ -177,6 +178,15 @@ class Inventory:
       return (match_res.group(1), match_res.group(2))
     else:
       return (None, None)
+
+  def get_order_receipt(self, choices):
+    print(choices)
+    invalid_choice = []
+    for c in choices:
+      if int(c) > len(self.__inventory_order_list) or int(c) < 1:
+        invalid_choice.append(c)
+
+    print(invalid_choice)
 
 
 class SaleItem:
