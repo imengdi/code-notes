@@ -1,4 +1,10 @@
 #!/bin/bash
 
+# 1. A minimal print out "Hello World", the output file is a.out
 gcc -c minimal.S && ld minimal.o
-gcc logisim.c -o logisim.out -static
+
+# 2. A static link of C program, the output file is b.out
+gcc logisim.c -o b.out -static
+
+# 3. A dynamic link of C program, the output file is c.out
+gcc logisim.c -o c.out
