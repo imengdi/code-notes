@@ -54,6 +54,8 @@ cover/
 # Translations
 *.mo
 *.pot
+*.o
+*.out
 
 # Compress
 *.zip

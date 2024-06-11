@@ -11,7 +11,8 @@ done
 mkdir -p /proc && mount -t proc  none /proc
 mkdir -p /sys  && mount -t sysfs none /sys
 
-export PS1='(linux) '
+export PS1='(linux)$ '
 
 # Rock'n Roll!
+/bin/busybox echo "Welcome to the minimal Linux ..."
 /bin/busybox sh
