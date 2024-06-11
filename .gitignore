@@ -55,6 +55,10 @@ cover/
 *.mo
 *.pot
 
+# Compress
+*.zip
+*.tar.gz
+
 # Django stuff:
 *.log
 local_settings.py
