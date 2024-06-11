@@ -17,10 +17,23 @@ $ cd ../..
 $ make
 ```
 
-* Run the Mini-OS with Qemu
+* Run the mini Linux with Qemu
 
 ```
 $ make run
+```
+
+* Run the apps in mini Linux
+
+```
+(linux)$ cd code
+(linux)$ ./a.out
+Hello, OS World
+(linux)$ timeout 3 ./b.out
+A = 1; B = 1; C = 1; D = 1; E = 1; F = 1; G = 0;
+A = 0; B = 1; C = 1; D = 0; E = 0; F = 0; G = 0;
+A = 1; B = 1; C = 0; D = 1; E = 1; F = 0; G = 1;
+Terminated
 ```
 
 * Exit the Qemu `Ctrl + A` then press `X`
