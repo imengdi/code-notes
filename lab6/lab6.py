@@ -1,4 +1,8 @@
+# Name: Mengdi Zhu
+# Lab: Lab6
+
 import re
+
 
 def data_reading(file_path):
   try:
