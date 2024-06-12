@@ -25,7 +25,7 @@ $ make run
 * Run the apps in mini Linux
 
 ```
-(linux)$ cd app
+(linux)$ cd apps
 (linux)$ ./hello.out
 Hello, OS World
 (linux)$ timeout 3 ./logisim.out
