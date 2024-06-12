@@ -18,5 +18,5 @@ run:
 clean:
 	@rm -rf build
 
-code:
-	@./build.sh
+apps:
+	@./build-apps.sh

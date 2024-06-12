@@ -6,14 +6,13 @@ Sync the course code with network
 * Compile the app to binary
 
 ```
-$ cd mini-os/initramfs/code
-$ ./build.sh
+$ cd mini-os
+$ make apps
 ```
 
-* Build the initramfs with the apps
+* Build the initramfs with the apps included
 
 ```
-$ cd ../..
 $ make
 ```
 
