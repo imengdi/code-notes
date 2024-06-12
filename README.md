@@ -26,9 +26,9 @@ $ make run
 
 ```
 (linux)$ cd apps
-(linux)$ ./hello.out
+(linux)$ ./hello
 Hello, OS World
-(linux)$ timeout 3 ./logisim.out
+(linux)$ timeout 3 ./logisim
 A = 1; B = 1; C = 1; D = 1; E = 1; F = 1; G = 0;
 A = 0; B = 1; C = 1; D = 0; E = 0; F = 0; G = 0;
 A = 1; B = 1; C = 0; D = 1; E = 1; F = 0; G = 1;
