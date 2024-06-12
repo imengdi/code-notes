@@ -17,3 +17,6 @@ run:
 
 clean:
 	@rm -rf build
+
+code:
+	@./build.sh
