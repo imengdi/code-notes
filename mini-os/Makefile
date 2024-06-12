@@ -11,7 +11,7 @@ run:
 	  -nographic \
 	  -serial mon:stdio \
 	  -m 128 \
-	  -kernel vmlinuz \
+	  -kernel boot/Image \
 	  -initrd build/initramfs.cpio.gz \
 	  -append "console=ttyS0 quiet acpi=off"
 
