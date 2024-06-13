@@ -2,7 +2,7 @@
 
 $(shell mkdir -p build)
 
-initramfs:
+initramfs: apps
 	@cd initramfs && find . -print0 | cpio --null -ov --format=newc | gzip -9 \
 	  > ../build/initramfs.cpio.gz
 
@@ -17,6 +17,7 @@ run:
 
 clean:
 	@rm -rf build
+	@rm -rf initramfs/apps
 
 apps:
 	@./build-apps.sh
