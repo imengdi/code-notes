@@ -8,8 +8,8 @@ for cmd in $c1 $c2 $c3; do
   /bin/busybox ln -s /bin/busybox /bin/$cmd
 done
 
-mkdir -p /proc && mount -t proc  none /proc
-mkdir -p /sys  && mount -t sysfs none /sys
+mkdir -p /proc && mount -t proc  proc  /proc
+mkdir -p /sys  && mount -t sysfs sysfs /sys
 
 export PS1='(linux)$ '
 
