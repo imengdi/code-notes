@@ -9,7 +9,7 @@ from ranking import Ranking
 
 class UI:
   def __init__(self):
-    rank_file_name = "not_exist.txt"
+    rank_file_name = "lab6.txt"
     rank_lang_num = 0
 
     while True:
@@ -26,15 +26,46 @@ class UI:
 
     print("Ranking for {} languages from {}\n".format(rank_lang_num, rank_file_name))
 
+
+  def print_ui_menu(self):
     print("r. Languages by ranking")
     print("c. Languages by change")
     print("l. Language info")
     print("q. Quit")
 
 
+  def view_lang_by_rank(self):
+    pass
+
+
+  def view_lang_by_change(self):
+    pass
+
+
+  def view_lang_info(self):
+    pass
+
 
   def run(self):
-    print("run the UI")
+    while True:
+      self.print_ui_menu()
+      user_choice = input("Enter choice: ")
+      user_choice = user_choice.lower()
+
+      if user_choice == "q":
+        break
+
+      elif user_choice == "r":
+        pass
+
+      elif user_choice == "c":
+        pass
+
+      elif user_choice == "l":
+        pass
+
+      else:
+        print("r, c, l, or q only\n")
 
 
 def main():
