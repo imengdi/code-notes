@@ -4,14 +4,20 @@
 import sys
 import re
 
+from ranking import Ranking
+
 
 class UI:
   def __init__(self):
-    pass
+    self.__lang_rank = Ranking()
+    self.__lang_rank.print_lang_rank()
+
+  def run(self):
+    print("run the UI")
 
 
 def main():
-  pass
+  UI().run()
 
 
 # Entry point of the program
