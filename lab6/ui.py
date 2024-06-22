@@ -34,7 +34,7 @@ class UI:
     print("q. Quit")
 
 
-  def view_lang_by_rank(self):
+  def view_lang_by_ranking(self):
     pass
 
 
@@ -56,22 +56,18 @@ class UI:
         break
 
       elif user_choice == "r":
-        pass
+        self.view_lang_by_ranking()
 
       elif user_choice == "c":
-        pass
+        self.view_lang_by_change()
 
       elif user_choice == "l":
-        pass
+        self.view_lang_info()
 
       else:
         print("r, c, l, or q only\n")
 
 
-def main():
-  UI().run()
-
-
 # Entry point of the program
 if __name__ == '__main__':
-  main()
+  UI().run()
