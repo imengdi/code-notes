@@ -9,8 +9,8 @@ from ranking import Ranking
 
 class UI:
   def __init__(self):
-    self.__lang_rank = Ranking()
-    self.__lang_rank.print_lang_rank()
+    self.__rank_obj = Ranking()
+    self.__rank_obj.print_lang_rank()
 
   def run(self):
     print("run the UI")
