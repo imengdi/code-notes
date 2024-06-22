@@ -10,7 +10,9 @@ from ranking import Ranking
 class UI:
   def __init__(self):
     self.__rank_obj = Ranking()
-    self.__rank_obj.print_lang_rank()
+    myiter = iter(self.__rank_obj)
+    for i in myiter:
+      print(i)
 
 
   def run(self):
