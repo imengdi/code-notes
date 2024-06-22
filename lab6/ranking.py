@@ -72,6 +72,16 @@ class Ranking:
       raise StopIteration
 
 
+  def is_obj_ready(self):
+    if self.__lang_rank_len == 0:
+      return False
+    return True
+
+
+  def get_rank_lang_num(self):
+    return self.__lang_rank_len
+
+
   def print_lang_rank(self):
     for item in self.__lang_rank_all:
       print(item)
