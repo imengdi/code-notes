@@ -11,6 +11,7 @@ class Ranking:
   def __init__(self, file_path="lab6.txt"):
     self.__lang_rank_t1 = []
     self.__lang_rank_t2 = []
+    self.__lang_rank_all = []
 
     try:
       input_file = open(file_path, "r")
@@ -40,11 +41,14 @@ class Ranking:
           else:
             continue
 
-    # Close file and return
+    # Close input file
     input_file.close()
 
+    # Post data processing
+    self.__lang_rank_all.extend(self.__lang_rank_t1)
+    self.__lang_rank_all.extend(self.__lang_rank_t2)
+
+
   def print_lang_rank(self):
-    for t1 in self.__lang_rank_t1:
-      print(t1)
-    for t2 in self.__lang_rank_t2:
-      print(t2)
+    for item in self.__lang_rank_all:
+      print(item)

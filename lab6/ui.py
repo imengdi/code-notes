@@ -12,6 +12,7 @@ class UI:
     self.__rank_obj = Ranking()
     self.__rank_obj.print_lang_rank()
 
+
   def run(self):
     print("run the UI")
 
