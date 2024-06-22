@@ -6,9 +6,9 @@ import re
 TABLE_ONE_ITEMS = 6
 TABLE_TWO_ITEMS = 3
 
-LANG_RANK = 0
-LANG_NAME = 1
-LANG_CG_RATE = 2
+LANG_NAME = 0
+LANG_RATE = 1
+LANG_CHGE = 2
 
 
 class Ranking:
@@ -43,9 +43,9 @@ class Ranking:
           if len(sub_m) == TABLE_ONE_ITEMS:
             # x = (sub_m[-1])
             # print(float(x.strip('%')))
-            self.__lang_rank_t1.append((sub_m[0], sub_m[3], float(sub_m[-1].strip('%'))))
+            self.__lang_rank_t1.append((sub_m[3], float(sub_m[-2].strip('%')), float(sub_m[-1].strip('%'))))
           elif len(sub_m) == TABLE_TWO_ITEMS:
-            self.__lang_rank_t2.append((sub_m[0], sub_m[1], None))
+            self.__lang_rank_t2.append((sub_m[1], float(sub_m[2].strip('%')), None))
           else:
             continue
 
@@ -66,7 +66,7 @@ class Ranking:
     if self.__iter_idx < self.__lang_rank_len:
       idx = self.__iter_idx
       self.__iter_idx += 1
-      return self.__lang_rank_all[idx][LANG_CG_RATE]
+      return self.__lang_rank_all[idx]
     else:
       self.__iter_idx = 0
       raise StopIteration

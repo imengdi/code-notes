@@ -20,9 +20,9 @@ class UI:
       rank_file_name = input("Enter a valid input filename: ")
       print()
 
-    # myiter = iter(self.__rank_obj)
-    # for i in myiter:
-    #   print(i)
+    myiter = iter(self.__rank_obj)
+    for i in myiter:
+      print(i)
 
     print("Ranking for {} languages from {}\n".format(rank_lang_num, rank_file_name))
 
@@ -35,7 +35,8 @@ class UI:
 
 
   def view_lang_by_ranking(self):
-    pass
+    print("Printing one language at a time")
+    print("After each language, press Enter to continue, any other key to stop\n")
 
 
   def view_lang_by_change(self):
