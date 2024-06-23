@@ -8,8 +8,12 @@ from ranking import Ranking
 
 class UI:
   def __init__(self):
-    rank_file_name = "lab6.txt"
+    self.__task_list = {"r": self.view_lang_by_ranking,
+                        "c": self.view_lang_by_change,
+                        "l": self.view_lang_info,
+                        "q": exit}
 
+    rank_file_name = "lab6.txt"
     while True:
       self.__rank_obj = Ranking(rank_file_name)
       if self.__rank_obj.is_obj_ready():
@@ -19,11 +23,6 @@ class UI:
       print()
 
     print("Ranking for {} languages from {}\n".format(rank_lang_num, rank_file_name))
-
-    self.__task_list = {"r": self.view_lang_by_ranking,
-                        "c": self.view_lang_by_change,
-                        "l": self.view_lang_info,
-                        "q": exit}
 
 
   def view_lang_by_ranking(self):
