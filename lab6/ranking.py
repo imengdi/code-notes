@@ -41,8 +41,6 @@ class Ranking:
         for m_items in matches:
           sub_m = re.findall(detail_pattern, m_items)
           if len(sub_m) == TABLE_ONE_ITEMS:
-            # x = (sub_m[-1])
-            # print(float(x.strip('%')))
             self.__lang_rank_t1.append((sub_m[3], float(sub_m[-2].strip('%')), float(sub_m[-1].strip('%'))))
           elif len(sub_m) == TABLE_TWO_ITEMS:
             self.__lang_rank_t2.append((sub_m[1], float(sub_m[2].strip('%')), None))
@@ -80,6 +78,10 @@ class Ranking:
 
   def get_rank_lang_num(self):
     return self.__lang_rank_len
+
+
+  def lang_ranking_generator(self):
+    return ((rank[LANG_NAME], rank[LANG_RATE]) for rank in self.__lang_rank_all)
 
 
   def print_lang_rank(self):
