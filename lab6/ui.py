@@ -9,7 +9,6 @@ from ranking import Ranking
 class UI:
   def __init__(self):
     rank_file_name = "lab6.txt"
-    rank_lang_num = 0
 
     while True:
       self.__rank_obj = Ranking(rank_file_name)
