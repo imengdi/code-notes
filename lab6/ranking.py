@@ -17,6 +17,7 @@ class Ranking:
     self.__lang_rank_t2 = []
     self.__lang_rank_all = []
     self.__lang_rank_by_change = []
+    self.__lang_list_dic = None
     self.__lang_rank_len = 0
     self.__iter_idx = 0
 
@@ -56,6 +57,7 @@ class Ranking:
     self.__lang_rank_all.extend(self.__lang_rank_t2)
     self.__lang_rank_len = len(self.__lang_rank_all)
     self.__lang_rank_by_change = sorted(self.__lang_rank_t1, key=lambda v: v[LANG_CHGE], reverse=True)
+    self.__lang_list_dic = {rank[LANG_NAME].lower(): rank for rank in self.__lang_rank_all}
 
 
   def __iter__(self):
@@ -92,6 +94,7 @@ class Ranking:
         yield rank_info
 
 
-  def print_lang_rank(self):
-    for item in self.__lang_rank_all:
-      print(item)
+  def lang_info_search(self, lang_name):
+    if lang_name in self.__lang_list_dic:
+      return self.__lang_list_dic[lang_name]
+    return None

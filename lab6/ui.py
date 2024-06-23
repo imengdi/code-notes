@@ -1,7 +1,6 @@
 # Name: Mengdi Zhu
 # Lab: Lab6
 
-import sys
 import re
 
 from ranking import Ranking
@@ -73,7 +72,21 @@ class UI:
 
 
   def view_lang_info(self):
-    pass
+    while True:
+      user_choice = input("Enter language names, separated by comma: ")
+      user_choice = user_choice.lower()
+      choices = [word.strip() for word in re.split(r',', user_choice) if word.strip()]
+      if len(choices) > 0:
+        break
+
+    print("  Language            Rank   Change")
+    for lang_name in choices:
+      res = self.__rank_obj.lang_info_search(lang_name)
+      if res is None:
+        print("{} not found".format(lang_name))
+      else:
+        print(res)
+    print()
 
 
   def run(self):
