@@ -26,20 +26,12 @@ class UI:
                         "q": exit}
 
 
-  def print_ui_menu(self):
-    print("r. Languages by ranking")
-    print("c. Languages by change")
-    print("l. Language info")
-    print("q. Quit")
-
-
   def view_lang_by_ranking(self):
     print("Printing one language at a time")
     print("After each language, press Enter to continue, any other key to stop\n")
 
     for count, rank_info in enumerate(self.__rank_obj.lang_ranking_generator()):
       print(" {} {}\t\t\t{}".format(count + 1, rank_info[0], rank_info[1]))
-
       if input() != "":
         print()
         break
@@ -87,7 +79,10 @@ class UI:
 
   def run(self):
     while True:
-      self.print_ui_menu()
+      print("r. Languages by ranking")
+      print("c. Languages by change")
+      print("l. Language info")
+      print("q. Quit")
       user_choice = input("Enter choice: ")
       user_choice = user_choice.lower()
 
