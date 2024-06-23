@@ -39,7 +39,7 @@ class UI:
 
       pre_indent = 1 - lang_idx // 10
       pos_indent = col_width - len(lang_name) - 1
-      print("", lang_idx, " " * pre_indent + lang_name + " " * pos_indent, lang_rate)
+      print("", lang_idx, " " * pre_indent + lang_name + " " * pos_indent, "%.2f" % lang_rate)
       if input() != "":
         print()
         break
@@ -54,7 +54,7 @@ class UI:
       print("p. Positive change")
       print("n. Negative change")
       user_choice = input("Enter choice: ")
-      user_choice = user_choice.lower()
+      user_choice = user_choice.lower().strip()
       if user_choice == "p" or user_choice == "1":
         direction = True
         break
@@ -63,8 +63,13 @@ class UI:
         direction = False
         break
 
+    col_width = 22
     for rank_info in self.__rank_obj.lang_change_generator(direction):
-      print("{}\t\t\t{}".format(rank_info[0], rank_info[-1]))
+      lang_name = rank_info[0]
+      lang_chag = rank_info[-1]
+
+      pos_indent = col_width - len(lang_name) - 1
+      print(lang_name + " " * pos_indent, "%.2f" % lang_chag)
     print()
 
 
@@ -95,7 +100,7 @@ class UI:
       print("l. Language info")
       print("q. Quit")
       user_choice = input("Enter choice: ")
-      user_choice = user_choice.lower()
+      user_choice = user_choice.lower().strip()
 
       if user_choice not in self.__task_list:
         print("r, c, l, or q only\n")
