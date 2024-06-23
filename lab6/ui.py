@@ -9,6 +9,7 @@ from ranking import Ranking
 class UI:
   __rank_layout_width = 25
   __chag_layout_width = 22
+  __info_layout_width = 26
 
   def __init__(self):
     """A method to create the Ranking object with a given input file."""
@@ -86,14 +87,27 @@ class UI:
       if len(choices) > 0:
         break
 
-    print("  Language            Rank   Change")
+    print(" ", "Language" + " " * 11, "Rank" + " " * 2, "Change")
     for lang_name in choices:
-      res = self.__rank_obj.lang_info_search(lang_name)
-      if res is None:
+      rank_info = self.__rank_obj.lang_info_search(lang_name)
+      if rank_info is None:
         print("{} not found".format(lang_name))
       else:
-        print(res)
+        self.fine_print_info(*rank_info)
     print()
+
+
+  def fine_print_info(self, lang_name, lang_rate, lang_chag):
+    """Helper function for fine printing search info of lang rank"""
+    lang_rate = "%.2f" % lang_rate
+    pre_indent = UI.__info_layout_width - len(lang_name) - len(lang_rate) - 1
+    pos_indent = 2
+    if lang_chag is None:
+      print(lang_name, " " * pre_indent + lang_rate, "(no change info)")
+    else:
+      if lang_chag < 0:
+        pos_indent = 1
+      print(lang_name, " " * pre_indent + lang_rate + " " * pos_indent, "%.2f" % lang_chag)
 
 
   def run(self):
