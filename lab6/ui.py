@@ -8,6 +8,7 @@ from ranking import Ranking
 
 class UI:
   def __init__(self):
+    """A method to create the Ranking object with a given input file."""
     self.__task_list = {"r": self.view_lang_by_ranking,
                         "c": self.view_lang_by_change,
                         "l": self.view_lang_info,
@@ -26,6 +27,7 @@ class UI:
 
 
   def view_lang_by_ranking(self):
+    """A method to let the user view, by ranking order, one language at a time."""
     print("Printing one language at a time")
     print("After each language, press Enter to continue, any other key to stop\n")
 
@@ -40,6 +42,7 @@ class UI:
 
 
   def view_lang_by_change(self):
+    """A method to let the user view languages with positive or negative change, sorted by change order."""
     while True:
       print("p. Positive change")
       print("n. Negative change")
@@ -59,6 +62,7 @@ class UI:
 
 
   def view_lang_info(self):
+    """A method to let the user view all info of one or more languages."""
     while True:
       user_choice = input("Enter language names, separated by comma: ")
       user_choice = user_choice.lower()
@@ -77,6 +81,7 @@ class UI:
 
 
   def run(self):
+    """An entry method that coordinates all the interactions with the user."""
     while True:
       print("r. Languages by ranking")
       print("c. Languages by change")

@@ -13,6 +13,7 @@ LANG_CHGE = 2
 
 class Ranking:
   def __init__(self, file_path="lab6.txt"):
+    """Initialize the Ranking object with data from the input file."""
     self.__lang_rank_t1 = []
     self.__lang_rank_t2 = []
     self.__lang_rank_all = []
@@ -61,10 +62,12 @@ class Ranking:
 
 
   def __iter__(self):
+    """Override the iterator, just for fun here."""
     return self
 
 
   def __next__(self):
+    """Override the next method returns the next data, just for fun here."""
     if self.__iter_idx < self.__lang_rank_len:
       idx = self.__iter_idx
       self.__iter_idx += 1
@@ -75,26 +78,31 @@ class Ranking:
 
 
   def is_obj_ready(self):
+    """Check the initialize status of the Ranking object."""
     if self.__lang_rank_len == 0:
       return False
     return True
 
 
   def get_rank_lang_num(self):
+    """The length of the data items from the input file."""
     return self.__lang_rank_len
 
 
   def lang_ranking_generator(self):
+    """Return a generator of languages and ratings, sorted by ranking."""
     return ((rank[LANG_NAME], rank[LANG_RATE]) for rank in self.__lang_rank_all)
 
 
   def lang_change_generator(self, direction):
+    """Generator method that yields languages, sorted by change for top 20 languages."""
     for rank_info in self.__lang_rank_by_change:
       if direction and rank_info[LANG_CHGE] >= 0 or not direction and rank_info[LANG_CHGE] < 0:
         yield rank_info
 
 
   def lang_info_search(self, lang_name):
+    """Method that accept one or more languages as input arguments for a search of rank info."""
     if lang_name in self.__lang_list_dic:
       return self.__lang_list_dic[lang_name]
     return None
