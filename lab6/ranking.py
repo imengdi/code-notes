@@ -44,9 +44,9 @@ class Ranking:
         for m_items in matches:
           sub_m = re.findall(detail_pattern, m_items)
           if len(sub_m) == TABLE_ONE_ITEMS:
-            self.__lang_rank_t1.append((sub_m[3], float(sub_m[-2].strip('%')), float(sub_m[-1].strip('%'))))
+            self.__lang_rank_t1.append((sub_m[3], "%.2f" % float(sub_m[-2].strip('%')), "%.2f" % float(sub_m[-1].strip('%'))))
           elif len(sub_m) == TABLE_TWO_ITEMS:
-            self.__lang_rank_t2.append((sub_m[1], float(sub_m[2].strip('%')), None))
+            self.__lang_rank_t2.append((sub_m[1], "%.2f" % float(sub_m[2].strip('%')), None))
           else:
             continue
 
