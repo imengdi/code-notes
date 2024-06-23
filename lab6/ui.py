@@ -88,10 +88,10 @@ class UI:
         break
 
     print(" ", "Language" + " " * 11, "Rank" + " " * 2, "Change")
-    for lang_name in choices:
-      rank_info = self.__rank_obj.lang_info_search(lang_name)
+    for lang_target in choices:
+      rank_info = self.__rank_obj.lang_info_search(lang_target)
       if rank_info is None:
-        print("{} not found".format(lang_name))
+        print("{} not found".format(lang_target))
       else:
         self.fine_print_info(*rank_info)
     print()
