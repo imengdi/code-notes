@@ -98,7 +98,7 @@ class Ranking:
     """Generator method that yields languages, sorted by change for top 20 languages."""
     for rank_info in self.__lang_rank_by_change:
       if direction and rank_info[LANG_CHGE] >= 0 or not direction and rank_info[LANG_CHGE] < 0:
-        yield rank_info
+        yield (rank_info[LANG_NAME], rank_info[LANG_CHGE])
 
 
   def lang_info_search(self, lang_name):

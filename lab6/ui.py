@@ -7,6 +7,9 @@ from ranking import Ranking
 
 
 class UI:
+  __rank_layout_width = 25
+  __chag_layout_width = 22
+
   def __init__(self):
     """A method to create the Ranking object with a given input file."""
     self.__task_list = {"r": self.view_lang_by_ranking,
@@ -31,21 +34,27 @@ class UI:
     print("Printing one language at a time")
     print("After each language, press Enter to continue, any other key to stop\n")
 
-    col_width = 25
     for count, rank_info in enumerate(self.__rank_obj.lang_ranking_generator()):
-      lang_name = rank_info[0]
-      lang_rate = rank_info[1]
-      lang_idx = count + 1
-
-      pre_indent = 1 - lang_idx // 10
-      pos_indent = col_width - len(lang_name) - 1
-      print("", lang_idx, " " * pre_indent + lang_name + " " * pos_indent, "%.2f" % lang_rate)
+      self.fine_print_ranking(count + 1, *rank_info)
       if input() != "":
         print()
         break
     else:
       print(" ---END OF MESSAGE---")
       print()
+
+
+  def fine_print_ranking(self, lang_idx, lang_name, lang_rate):
+    """Helper function for fine printing language ranking"""
+    pre_indent = 1 - lang_idx // 10
+    pos_indent = UI.__rank_layout_width - len(lang_name) - 1
+    print("", lang_idx, " " * pre_indent + lang_name + " " * pos_indent, "%.2f" % lang_rate)
+
+
+  def fine_print_change(self, lang_name, lang_chag):
+    """Helper function for fine printing language rank by change"""
+    pos_indent = UI.__chag_layout_width - len(lang_name) - 1
+    print(lang_name + " " * pos_indent, "%.2f" % lang_chag)
 
 
   def view_lang_by_change(self):
@@ -63,13 +72,8 @@ class UI:
         direction = False
         break
 
-    col_width = 22
     for rank_info in self.__rank_obj.lang_change_generator(direction):
-      lang_name = rank_info[0]
-      lang_chag = rank_info[-1]
-
-      pos_indent = col_width - len(lang_name) - 1
-      print(lang_name + " " * pos_indent, "%.2f" % lang_chag)
+      self.fine_print_change(*rank_info)
     print()
 
 
