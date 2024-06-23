@@ -31,8 +31,13 @@ class UI:
     print("Printing one language at a time")
     print("After each language, press Enter to continue, any other key to stop\n")
 
+    col_width = 25
     for count, rank_info in enumerate(self.__rank_obj.lang_ranking_generator()):
-      print(" {} {}\t\t\t{}".format(count + 1, rank_info[0], rank_info[1]))
+      lang_name = rank_info[0]
+      lang_rate = rank_info[1]
+      lang_idx = count + 1
+      indent_space = col_width - len(lang_name) - 1
+      print("", lang_idx, " " * (1 - lang_idx // 10) + lang_name + " " * indent_space, lang_rate)
       if input() != "":
         print()
         break
