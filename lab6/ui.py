@@ -21,6 +21,11 @@ class UI:
 
     print("Ranking for {} languages from {}\n".format(rank_lang_num, rank_file_name))
 
+    self.__task_list = {"r": self.view_lang_by_ranking,
+                        "c": self.view_lang_by_change,
+                        "l": self.view_lang_info,
+                        "q": exit}
+
 
   def print_ui_menu(self):
     print("r. Languages by ranking")
@@ -95,20 +100,10 @@ class UI:
       user_choice = input("Enter choice: ")
       user_choice = user_choice.lower()
 
-      if user_choice == "q":
-        break
-
-      elif user_choice == "r":
-        self.view_lang_by_ranking()
-
-      elif user_choice == "c":
-        self.view_lang_by_change()
-
-      elif user_choice == "l":
-        self.view_lang_info()
-
-      else:
+      if user_choice not in self.__task_list:
         print("r, c, l, or q only\n")
+      else:
+        self.__task_list[user_choice]()
 
 
 # Entry point of the program
