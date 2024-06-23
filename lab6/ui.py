@@ -53,7 +53,23 @@ class UI:
 
 
   def view_lang_by_change(self):
-    pass
+    while True:
+      print("p. Positive change")
+      print("n. Negative change")
+      user_choice = input("Enter choice: ")
+      user_choice = user_choice.lower()
+      if user_choice == "p" or user_choice == "1":
+        rkg_dir = True
+        break
+
+      if user_choice == "n" or user_choice == "2":
+        rkg_dir = False
+        break
+
+    rkg = self.__rank_obj.lang_change_generator(rkg_dir)
+    for rank_info in rkg:
+      print("{}\t\t\t{}".format(rank_info[0], rank_info[-1]))
+    print()
 
 
   def view_lang_info(self):

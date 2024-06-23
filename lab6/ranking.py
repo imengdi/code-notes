@@ -16,6 +16,7 @@ class Ranking:
     self.__lang_rank_t1 = []
     self.__lang_rank_t2 = []
     self.__lang_rank_all = []
+    self.__lang_rank_by_change = []
     self.__lang_rank_len = 0
     self.__iter_idx = 0
 
@@ -54,6 +55,7 @@ class Ranking:
     self.__lang_rank_all.extend(self.__lang_rank_t1)
     self.__lang_rank_all.extend(self.__lang_rank_t2)
     self.__lang_rank_len = len(self.__lang_rank_all)
+    self.__lang_rank_by_change = sorted(self.__lang_rank_t1, key=lambda v: v[LANG_CHGE], reverse=True)
 
 
   def __iter__(self):
@@ -82,6 +84,12 @@ class Ranking:
 
   def lang_ranking_generator(self):
     return ((rank[LANG_NAME], rank[LANG_RATE]) for rank in self.__lang_rank_all)
+
+
+  def lang_change_generator(self, direction):
+    for rank_info in self.__lang_rank_by_change:
+      if direction and rank_info[LANG_CHGE] >= 0 or not direction and rank_info[LANG_CHGE] < 0:
+        yield rank_info
 
 
   def print_lang_rank(self):
