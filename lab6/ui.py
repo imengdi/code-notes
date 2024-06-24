@@ -75,10 +75,10 @@ class UI:
         break
 
     print(" ", "Language" + " " * 11, "Rank" + " " * 2, "Change")
-    for lang_target in choices:
-      rank_info = self.__rank_obj.lang_info_search(lang_target)
+    for lang_name in choices:
+      rank_info = self.__rank_obj.lang_info_search(lang_name)
       if rank_info is None:
-        print("{} not found".format(lang_target))
+        print("{} not found".format(lang_name))
       else:
         self.fine_print_info(*rank_info)
     print()
@@ -101,12 +101,14 @@ class UI:
     """Helper function for fine printing search info of lang rank"""
     lang_rate = "%.2f" % lang_rate
     pre_indent = UI.__info_layout_width - len(lang_name) - len(lang_rate) - 1
-    pos_indent = 2
+
     if lang_chag is None:
       print(lang_name, " " * pre_indent + lang_rate, "(no change info)")
     else:
       if lang_chag < 0:
         pos_indent = 1
+      else:
+        pos_indent = 2
       print(lang_name, " " * pre_indent + lang_rate + " " * pos_indent, "%.2f" % lang_chag)
 
 
