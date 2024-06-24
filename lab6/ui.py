@@ -45,19 +45,6 @@ class UI:
       print()
 
 
-  def fine_print_ranking(self, lang_idx, lang_name, lang_rate):
-    """Helper function for fine printing language ranking"""
-    pre_indent = 1 - lang_idx // 10
-    pos_indent = UI.__rank_layout_width - len(lang_name) - 1
-    print("", lang_idx, " " * pre_indent + lang_name + " " * pos_indent, "%.2f" % lang_rate)
-
-
-  def fine_print_change(self, lang_name, lang_chag):
-    """Helper function for fine printing language rank by change"""
-    pos_indent = UI.__chag_layout_width - len(lang_name) - 1
-    print(lang_name + " " * pos_indent, "%.2f" % lang_chag)
-
-
   def view_lang_by_change(self):
     """A method to let the user view languages with positive or negative change, sorted by change order."""
     while True:
@@ -95,6 +82,19 @@ class UI:
       else:
         self.fine_print_info(*rank_info)
     print()
+
+
+  def fine_print_ranking(self, lang_idx, lang_name, lang_rate):
+    """Helper function for fine printing language ranking"""
+    pre_indent = 1 - lang_idx // 10
+    pos_indent = UI.__rank_layout_width - len(lang_name) - 1
+    print("", lang_idx, " " * pre_indent + lang_name + " " * pos_indent, "%.2f" % lang_rate)
+
+
+  def fine_print_change(self, lang_name, lang_chag):
+    """Helper function for fine printing language rank by change"""
+    pos_indent = UI.__chag_layout_width - len(lang_name) - 1
+    print(lang_name + " " * pos_indent, "%.2f" % lang_chag)
 
 
   def fine_print_info(self, lang_name, lang_rate, lang_chag):
