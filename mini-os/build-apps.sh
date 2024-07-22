@@ -4,6 +4,7 @@ CODE_PATH=./initramfs/code/
 APPS_PATH=./initramfs/apps/
 
 CROSS_COMPILE=""
+# CROSS_COMPILE="aarch64-linux-gnu-"
 CC_TOOL=${CROSS_COMPILE}gcc
 LD_TOOL=${CROSS_COMPILE}ld
 DP_TOOL=${CROSS_COMPILE}objdump
