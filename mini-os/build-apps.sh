@@ -4,6 +4,7 @@ CODE_PATH=./initramfs/code/
 APPS_PATH=./initramfs/apps/
 
 CROSS_COMPILE=""
+# CROSS_COMPILE="aarch64-linux-gnu-"
 CC_TOOL=${CROSS_COMPILE}gcc
 LD_TOOL=${CROSS_COMPILE}ld
 DP_TOOL=${CROSS_COMPILE}objdump
@@ -23,3 +24,7 @@ $DP_TOOL -d $APPS_PATH/logisim > $APPS_PATH/logisim.S
 # 3. A dynamic link of C program, the output file is logisim_
 $CC_TOOL $CODE_PATH/logisim.c -o $APPS_PATH/logisim_
 $DP_TOOL -d $APPS_PATH/logisim_ > $APPS_PATH/logisim_.S
+
+# 4. A static link of a reboot program using Linux system call
+$CC_TOOL $CODE_PATH/reboot.c -o $APPS_PATH/reboot -static
+$DP_TOOL -d $APPS_PATH/reboot > $APPS_PATH/reboot.S

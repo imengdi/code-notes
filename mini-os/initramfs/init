@@ -16,6 +16,9 @@ for cmd in $C1 $C2 $C3; do
   /bin/busybox ln -s /bin/busybox /bin/$cmd
 done
 
+# Linking reboot binary to bin folder
+/bin/busybox ln -s /apps/reboot /bin/reboot
+
 # Mount linux info to file system at userland
 mkdir -p /proc && mount -t $MOUNT1 $MOUNT1 /proc
 mkdir -p /sys  && mount -t $MOUNT2 $MOUNT2 /sys
